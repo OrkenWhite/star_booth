@@ -1,0 +1,11 @@
+{
+    "appName": "StarBooth",
+    "newPoll": "New poll",
+    "enterCode": "Enter code",
+    "aboutStar": "About STAR voting...",
+    "toggleDarkTheme": "Toggle dark theme",
+    "about": "About",
+    "copyright": "(C) 2023 Patrik Fábián",
+    "ok": "OK",
+    "starDescription": "STAR (Score Then Automatic Runoff) voting is a voting method, which voters can give \"scores\" to each candidate."
+}

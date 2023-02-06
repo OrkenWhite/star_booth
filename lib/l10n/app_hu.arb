@@ -1,0 +1,11 @@
+{
+    "appName": "StarBooth",
+    "newPoll": "Új szavazás",
+    "enterCode": "Kód használata",
+    "aboutStar": "A STAR szavazásról...",
+    "toggleDarkTheme": "Sötét/Világos mód",
+    "about": "Névjegy",
+    "copyright": "(C) 2023 Fábián Patrik",
+    "ok": "OK",
+    "starDescription": "STAR (Score Then Automatic Runoff) egy olyan szavazási módszer, ahol a szavazók \"pontszámot\" adnak a jelölteknek."
+}
