@@ -1,16 +1,7 @@
 # polling_booth
 
-An online voting machine
+An online voting machine using the STAR voting method.
 
-## Getting Started
+## What is STAR voting?
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I would advise you to read [this](https://www.starvoting.org/star), it is probably a better explanation than what I could give here.
