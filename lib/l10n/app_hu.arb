@@ -7,5 +7,8 @@
     "about": "Névjegy",
     "copyright": "(C) 2023 Fábián Patrik",
     "ok": "OK",
-    "starDescription": "STAR (Score Then Automatic Runoff) egy olyan szavazási módszer, ahol a szavazók \"pontszámot\" adnak a jelölteknek."
+    "starDescription": "STAR (Score Then Automatic Runoff) egy olyan szavazási módszer, ahol a szavazók \"pontszámot\" adnak a jelölteknek.",
+    "title": "Kérdés",
+    "option": "Válasz",
+    "deadline": "Szavazás vége"
 }

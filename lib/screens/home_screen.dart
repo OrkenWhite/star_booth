@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:polling_booth/model/new_poll_model.dart';
 import 'package:polling_booth/screens/about_star.dart';
 import 'package:polling_booth/widgets/card_button.dart';
+import 'package:provider/provider.dart';
 
 import 'new_vote.dart';
 
@@ -17,7 +19,7 @@ class HomeScreen extends StatelessWidget {
     var locProvider = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text(locProvider?.appName ?? "StarBooth",style:TextStyle(fontFamily: 'cursive')),
+          title: Text(locProvider?.appName ?? "StarBooth",style:const TextStyle(fontFamily: 'cursive')),
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Theme.of(context).primaryColor.computeLuminance() > 0.5 ? Colors.black : Colors.white,
@@ -86,7 +88,14 @@ class HomeScreen extends StatelessWidget {
                                   "New poll",
                               () {
                                 Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => const NewVoteScreen()));
+                                    MaterialPageRoute(
+                                      builder: (context){
+                                        return ChangeNotifierProvider(
+                                            create:(context) => NewPollModel(),
+                                            child: const NewVoteScreen()
+                                        );
+                                      }
+                                    ));
                               }),
                         ),
                         const SizedBox(width:40.0),
