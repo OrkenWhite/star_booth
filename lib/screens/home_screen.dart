@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:polling_booth/screens/about_star.dart';
 import 'package:polling_booth/widgets/card_button.dart';
 
+import 'new_vote.dart';
+
 enum BarMenuItem {showAboutDialog}
 
 class HomeScreen extends StatelessWidget {
@@ -82,7 +84,10 @@ class HomeScreen extends StatelessWidget {
                               Icons.add,
                               locProvider?.newPoll ??
                                   "New poll",
-                              () {}),
+                              () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => const NewVoteScreen()));
+                              }),
                         ),
                         const SizedBox(width:40.0),
                         Expanded(
