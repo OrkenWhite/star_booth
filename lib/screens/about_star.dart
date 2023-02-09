@@ -12,6 +12,7 @@ class AboutStarScreen extends StatelessWidget{
           icon: const Icon(Icons.arrow_back),
           onPressed: () {Navigator.of(context).pop();}
         ) ,
+        centerTitle: true,
         title: Text(locProvider?.aboutStar ?? "About STAR voting...")
     ),
       body: Padding(
