@@ -17,19 +17,21 @@ class AboutStarScreen extends StatelessWidget{
     ),
       body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Card(
-                  child:
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        locProvider?.starDescription ?? "Star voting description missing"
-                      ),
-                    )
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Card(
+                    child:
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          locProvider?.starDescription ?? "Star voting description missing"
+                        ),
+                      )
+              ),
+                )],
             ),
-              )],
           )
       )
     );
