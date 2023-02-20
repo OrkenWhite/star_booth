@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:polling_booth/model/new_poll_model.dart';
+import 'package:polling_booth/screens/poll_code_screen.dart';
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
 
@@ -24,30 +25,38 @@ class NewVoteScreen extends StatelessWidget{
             onPressed: () {Navigator.of(context).pop();}
         ) ,
         centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Theme.of(context).primaryColor.computeLuminance() > 0.5 ? Colors.black : Colors.white,
         actions: [
           Padding(
             padding:const EdgeInsets.only(right: 5.0),
             child: IconButton(
               icon: const Icon(Icons.check),
-              onPressed: (){newPoll.submitPoll();},
-            )
-          )
-        ],
-        title: Text(locProvider?.newPoll ?? "New poll..."),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
+              onPressed: (){
+                //TODO: change me
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return PollCodeScreen(newPoll);
+                }));
+              },
+                )
+                )
+                ],
+                title: Text(locProvider?.newPoll ?? "New poll..."),
+                ),
+                body: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SingleChildScrollView(
+                child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
-                        initialValue: newPoll.title,
-                        onChanged: (newTitle) => newPoll.setTitle(newTitle),
-                        decoration: InputDecoration(
-                          label: Text(locProvider?.title ?? "Title"),
+                Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                initialValue: newPoll.title,
+                onChanged: (newTitle) => newPoll.setTitle(newTitle),
+                decoration: InputDecoration(
+                label: Text(locProvider?.title ?? "Title"
+                ),
                           border: const OutlineInputBorder()
                         ),
                       ),
@@ -74,7 +83,7 @@ class NewVoteScreen extends StatelessWidget{
                                           newPoll.setOption(newOption, index),
                                       decoration: InputDecoration(
                                           label: Text(
-                                              (locProvider?.option ?? "Option") + " " + (index + 1).toString()
+                                              "${locProvider?.option ?? "Option"} ${index + 1}"
                                           ),
                                           border: const OutlineInputBorder(),
                                           suffixIcon: index > 0 ?

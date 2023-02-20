@@ -10,5 +10,18 @@
     "starDescription": "STAR (Score Then Automatic Runoff) egy olyan szavazási módszer, ahol a szavazók \"pontszámot\" adnak a jelölteknek.",
     "title": "Kérdés",
     "option": "Válasz",
-    "deadline": "Szavazás vége"
+    "deadline": "Szavazás vége",
+    "pollCreated": "A szavazás sikeresen létrejött.",
+    "votingCode": "Szavazókód",
+    "liveResults": "Élő eredmények",
+    "codeInvalid": "Ez nem egy érvényes kód",
+    "codeValid": "Ez a kód egy érvényes szavazókód",
+    "codeEntryHelp": "Add meg a szavazókódot!",
+    "code": "Kód",
+    "join": "Csatlakozás",
+    "vote": "Szavazás",
+    "voteHelp": "Húzd a csúszkákat aszerint, hogy mennyire támogatod az adott opciót!",
+    "submit": "Küldés",
+    "automaticRunoff": "Automatikus döntő forduló",
+    "winner": "Nyertes"
 }

@@ -10,5 +10,18 @@
     "starDescription": "STAR (Score Then Automatic Runoff) voting is a voting method, which voters can give \"scores\" to each candidate.",
     "title": "Question",
     "option": "Option",
-    "deadline": "Vote ends"
+    "deadline": "Vote ends",
+    "pollCreated": "Poll successfully created.",
+    "votingCode": "Voting code",
+    "liveResults": "Live results",
+    "codeInvalid": "This code is not valid",
+    "codeValid": "This code is a valid voting code",
+    "codeEntryHelp": "Enter your voting code!",
+    "code": "Code",
+    "join": "Join",
+    "vote": "Vote",
+    "voteHelp": "Set the sliders according to your preferences.",
+    "submit": "Submit",
+    "automaticRunoff": "Automatic runoff",
+    "winner": "Winner"
 }

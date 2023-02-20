@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:polling_booth/model/new_poll_model.dart';
 import 'package:polling_booth/screens/about_star.dart';
+import 'package:polling_booth/screens/vote_join_screen.dart';
 import 'package:polling_booth/widgets/card_button.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     var locProvider = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text(locProvider?.appName ?? "StarBooth",style:const TextStyle(fontFamily: 'cursive')),
+          title: Text(locProvider?.appName ?? "StarBooth",style:const TextStyle(fontFamily: 'cursive',fontSize: 32.0)),
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Theme.of(context).primaryColor.computeLuminance() > 0.5 ? Colors.black : Colors.white,
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                           context: context,
                           builder: (_) => AlertDialog(
                             title: Text(locProvider?.about ?? "About"),
-                            content: Text((locProvider?.appName ?? "StarBooth") + "\r\n" + (locProvider?.copyright ?? "(C) 2023 Patrik Fábián") ),
+                            content: Text("${locProvider?.appName ?? "StarBooth"}\r\n${locProvider?.copyright ?? "(C) 2023 Patrik Fábián"}" ),
                             actions: <Widget>[
                               TextButton(
                                   onPressed: (){Navigator.of(context).pop(context);},
@@ -100,7 +101,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(width:40.0),
                         Expanded(
-                          child: CardButton(Icons.how_to_vote_rounded,locProvider?.enterCode ?? "Enter code",(){}),
+                          child: CardButton(Icons.how_to_vote_rounded,locProvider?.enterCode ?? "Enter code",(){
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context){
+                                return const VoteJoinScreen();
+                              }
+                            ));
+                          }),
                         )
                       ],
                     ),
