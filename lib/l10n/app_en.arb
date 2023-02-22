@@ -23,5 +23,13 @@
     "voteHelp": "Set the sliders according to your preferences.",
     "submit": "Submit",
     "automaticRunoff": "Automatic runoff",
-    "winner": "Winner"
+    "winner": "Winner",
+    "on": "on",
+    "off": "off",
+    "useSystemTheme": "Use system theme",
+    "mode": "mode",
+    "dark": "Dark",
+    "light": "Light",
+    "retry": "Retry",
+    "loginFailed": "Authenticating with the server failed!"
 }

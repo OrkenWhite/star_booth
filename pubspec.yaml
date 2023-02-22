@@ -40,6 +40,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   dynamic_color: ^1.6.2
   provider: ^6.0.5
+  firebase_database: ^10.0.13
+  firebase_auth: ^4.2.9
 
 dev_dependencies:
   flutter_test:
