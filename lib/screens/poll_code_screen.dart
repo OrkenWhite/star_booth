@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:polling_booth/model/new_poll_model.dart';
+import 'package:polling_booth/screens/result_screen.dart';
 import 'package:polling_booth/widgets/action_button.dart';
 import 'package:polling_booth/widgets/status_card.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../model/poll.dart';
 
 class PollCodeScreen extends StatelessWidget {
   final NewPollModel newPoll;
@@ -67,8 +70,12 @@ class PollCodeScreen extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [ActionButton(() {
-
+                  children: [ActionButton(() async {
+                    Poll poll = await Poll.getByCode(Provider.of(context,listen: false), newPoll.code ?? "");
+                    Navigator.of(context).push((MaterialPageRoute(builder:(_) =>
+                        ChangeNotifierProvider(
+                          create: (context) => poll,
+                          child: const ResultScreen(true),) )));
                   }, locProvider.liveResults)],
                 )
               ],

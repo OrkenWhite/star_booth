@@ -125,8 +125,8 @@ class HomeScreen extends StatelessWidget {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
                               return ChangeNotifierProvider(
-                                  create: (context) => NewPollModel(),
-                                  child: const NewVoteScreen());
+                                  create: (context) => NewPollModel(appState),
+                                  child: NewVoteScreen());
                             }));
                           }),
                         ),

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mutex/mutex.dart';
+import 'package:polling_booth/model/poll.dart';
 
 enum AppStates{
   loggingIn,
@@ -11,10 +13,12 @@ enum AppStates{
 
 class AppState extends ChangeNotifier {
   ThemeMode? _themeMode;
+  final fireBaseMutex = Mutex();
   ThemeMode? get themeMode => (_themeMode == null) ? ThemeMode.system : _themeMode;
   bool get useSystemTheme => (_themeMode == null);
   UserCredential? userCredential;
   AppStates? _appStateOverride;
+  Poll? currentPoll;
   AppStates get appStates {
     if(_appStateOverride != null) return _appStateOverride!;
     if(userCredential == null) {
@@ -28,9 +32,13 @@ class AppState extends ChangeNotifier {
   void startLogin() async{
     try {
       userCredential = null;
+      await fireBaseMutex.acquire();
       userCredential = await FirebaseAuth.instance.signInAnonymously();
     } on FirebaseAuthException catch(e){
       _appStateOverride = AppStates.loginFailed;
+    }
+    finally{
+      fireBaseMutex.release();
     }
     notifyListeners();
   }

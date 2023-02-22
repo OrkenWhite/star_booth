@@ -32,5 +32,11 @@
     "light": "Light",
     "retry": "Retry",
     "loginFailed": "Authenticating with the server failed!",
-    "unsupportedPlatform": "This platform is not supported at the moment. Stay tuned for updates!"
+    "unsupportedPlatform": "This platform is not supported at the moment. Stay tuned for updates!",
+    "titleTooShort": "Question too short!",
+    "serviceUnavailable": "Service unavailable. Try again later!",
+    "submitPollError": "An error occurred submitting the poll. Check the input fields!",
+    "needMoreOptions": "Add more options!",
+    "optionTooShort": "This option is too short!",
+    "needLaterDate": "Choose a later date!"
 }

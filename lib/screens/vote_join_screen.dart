@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:polling_booth/screens/result_screen.dart';
 import 'package:polling_booth/screens/vote_screen.dart';
 import 'package:polling_booth/widgets/action_button.dart';
 import 'package:provider/provider.dart';
 
+import '../model/app_state.dart';
 import '../model/poll.dart';
+import '../model/votable_poll.dart';
 import '../widgets/status_card.dart';
 
 enum CodeValidationStatus { tooShort, invalid, validating, valid }
@@ -13,10 +17,42 @@ class VoteJoinState extends State<VoteJoinScreen> {
   var status = CodeValidationStatus.tooShort;
   var code = "";
   var codeInputController = TextEditingController();
+  Future<void> validateCode(AppState appState) async{
+    if(code.length != 5){
+      setState(() {
+        status = code.length < 2 ? CodeValidationStatus.tooShort : CodeValidationStatus.invalid;
+      });
+      return;
+    }
+    try{
+      setState(() {
+        status = CodeValidationStatus.validating;
+      });
+      await appState.fireBaseMutex.acquire();
+      var poll = await FirebaseFirestore.instance.collection("polls").doc(code).get();
+      setState(() {
+        status = poll.exists ? CodeValidationStatus.valid : CodeValidationStatus.invalid;
+      });
+    }
+    finally{
+      appState.fireBaseMutex.release();
+    }
+  }
+  Future<void> navigateWithVoteCode(AppState appState,NavigatorState navigator,String code) async{
+    appState.currentPoll = await Poll.getByCode(appState, code);
+    if(appState.currentPoll?.error != null) return;
+    if(await appState.currentPoll!.getVotability(appState)){
+      navigator.pushAndRemoveUntil(MaterialPageRoute(builder: (context) => ChangeNotifierProvider(create:(context) => VotablePoll.fromPoll(appState.currentPoll!),child: const VoteScreen())), (route) => route.isFirst);
+    }
+    else{
+      navigator.pushAndRemoveUntil(MaterialPageRoute(builder: (context) => ChangeNotifierProvider(create: (context) => appState.currentPoll!,child: const ResultScreen(true))), (route) => route.isFirst);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     var locProvider = AppLocalizations.of(context)!;
     var theme = Theme.of(context);
+    AppState appState = Provider.of(context);
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -59,12 +95,8 @@ class VoteJoinState extends State<VoteJoinScreen> {
                     TextField(
                       controller: codeInputController,
                       onChanged: (it) {
-                        setState(() {
-                          code = it;
-                          status = it.length == 5
-                              ? CodeValidationStatus.valid
-                              : CodeValidationStatus.invalid;
-                        });
+                        code = it;
+                        validateCode(appState);
                       },
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -84,22 +116,7 @@ class VoteJoinState extends State<VoteJoinScreen> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 20.0),
                               child: ActionButton(() {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChangeNotifierProvider(
-                                          create: (context) => Poll(
-                                              "Test title",
-                                              {
-                                                "Test option 1 about the long text present here":
-                                                    0,
-                                                "Test option 2": 0,
-                                                "Test option 3": 0
-                                              },
-                                              null,
-                                              true,
-                                              null),
-                                          child: const VoteScreen(),
-                                        )));
+                                navigateWithVoteCode(appState, Navigator.of(context), code);
                               }, locProvider.join),
                             ),
                           )

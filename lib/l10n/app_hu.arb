@@ -32,5 +32,11 @@
     "light": "Világos",
     "retry": "Újra",
     "loginFailed": "A szerverrel való hitelesítés sikertelen!",
-    "unsupportedPlatform": "Ez a platform jelenleg nem támogatott."
+    "unsupportedPlatform": "Ez a platform jelenleg nem támogatott.",
+    "titleTooShort": "A kérdés túl rövid!",
+    "serviceUnavailable": "A szolgáltatás nem elérhető! Próbáld újra később!",
+    "submitPollError": "Hiba történt a beküldés közben. Ellenőrizd a beviteli mezőket!",
+    "needMoreOptions": "Adj hozzá több lehetőséget!",
+    "optionTooShort": "Ez a lehetőség túl rövid!",
+    "needLaterDate": "Válassz későbbi időpontot!"
 }

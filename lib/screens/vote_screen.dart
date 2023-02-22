@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:polling_booth/model/poll.dart';
+import 'package:polling_booth/model/votable_poll.dart';
 import 'package:polling_booth/screens/result_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../model/app_state.dart';
 import '../widgets/action_button.dart';
 
 class VoteScreen extends StatelessWidget {
@@ -12,7 +13,8 @@ class VoteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var locProvider = AppLocalizations.of(context)!;
     var theme = Theme.of(context);
-    return Consumer<Poll>(
+    AppState appState = Provider.of(context);
+    return Consumer<VotablePoll>(
       builder: (context, poll, child) => Scaffold(
           appBar: AppBar(
               leading: IconButton(
@@ -28,13 +30,15 @@ class VoteScreen extends StatelessWidget {
                       : Colors.white,
               title: Text(locProvider.vote)),
           body: Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 25.0,bottom: 25.0),
+              padding: const EdgeInsets.only(
+                  left: 10.0, right: 10.0, top: 25.0, bottom: 25.0),
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 30.0),
-                    child:
-                        Text(poll.title, style: theme.textTheme.headlineLarge?.copyWith(color: theme.colorScheme.primary)),
+                    child: Text(poll.title,
+                        style: theme.textTheme.headlineLarge
+                            ?.copyWith(color: theme.colorScheme.primary)),
                   ),
                   Text(
                     locProvider.voteHelp,
@@ -56,7 +60,10 @@ class VoteScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(width: 125,child: Text(poll.options.keys.elementAt(i))),
+                                      SizedBox(
+                                          width: 125,
+                                          child: Text(
+                                              poll.options.keys.elementAt(i))),
                                       Row(
                                         children: [
                                           Slider(
@@ -83,26 +90,17 @@ class VoteScreen extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.only(bottom: 20.0),
                       child: Row(children: [
-                        Expanded(child: ActionButton(() {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => ResultScreen(
-                                      Poll(
-                                          "Test title",
-                                          {
-                                            "Test option 1 about the long text present here":
-                                            2311,
-                                            "Test option 2": 1211,
-                                            "Test option 3": 333
-                                          },
-                                          {"Test option 1 about the long text present here":
-                                          1111, "Test option 2": 1222,},
-                                          false,
-                                          null)
-                                      ,false
-                                  )
-                              )
-                          );
+                        Expanded(
+                            child: ActionButton(() {
+                          poll.submitVote(appState).then((_) {
+                            if (poll.error == null) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider(create: (context) => appState.currentPoll!,child: const ResultScreen(false))),
+                                  (route) => route.isFirst);
+                            }
+                          });
                         }, locProvider.submit))
                       ]))
                 ],

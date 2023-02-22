@@ -8,7 +8,8 @@ import '../model/app_state.dart';
 
 enum FatalErrors{
   loginFailed,
-  fireBaseUnsupported
+  fireBaseUnsupported,
+  serviceUnavailable
 }
 
 class FatalErrorScreen extends StatelessWidget{
@@ -25,7 +26,7 @@ class FatalErrorScreen extends StatelessWidget{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          StatusCard(theme.colorScheme.error, theme.colorScheme.onError, reason == FatalErrors.loginFailed ? locProvider.loginFailed : locProvider.unsupportedPlatform),
+          StatusCard(theme.colorScheme.error, theme.colorScheme.onError, reason == FatalErrors.loginFailed ? locProvider.loginFailed : reason == FatalErrors.serviceUnavailable ? locProvider.serviceUnavailable : locProvider.unsupportedPlatform),
           if (reason == FatalErrors.loginFailed) const SizedBox(height: 30.0), if (reason == FatalErrors.loginFailed) ActionButton(() { appState.startLogin(); }, locProvider.retry)
         ],
       ),
