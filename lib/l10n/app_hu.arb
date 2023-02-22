@@ -31,5 +31,6 @@
     "dark": "Sötét",
     "light": "Világos",
     "retry": "Újra",
-    "loginFailed": "A szerverrel való hitelesítés sikertelen!"
+    "loginFailed": "A szerverrel való hitelesítés sikertelen!",
+    "unsupportedPlatform": "Ez a platform jelenleg nem támogatott."
 }

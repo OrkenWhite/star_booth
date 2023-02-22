@@ -6,8 +6,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../model/app_state.dart';
 
-class LoginFailedScreen extends StatelessWidget{
-  const LoginFailedScreen({super.key});
+enum FatalErrors{
+  loginFailed,
+  fireBaseUnsupported
+}
+
+class FatalErrorScreen extends StatelessWidget{
+  final FatalErrors reason;
+  const FatalErrorScreen(this.reason,{super.key});
 
   @override
   Widget build(BuildContext context){
@@ -19,9 +25,8 @@ class LoginFailedScreen extends StatelessWidget{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          StatusCard(theme.colorScheme.error, theme.colorScheme.onError, locProvider.loginFailed),
-          const SizedBox(height: 20.0),
-          ActionButton(() { appState.startLogin(); }, locProvider.retry)
+          StatusCard(theme.colorScheme.error, theme.colorScheme.onError, reason == FatalErrors.loginFailed ? locProvider.loginFailed : locProvider.unsupportedPlatform),
+          if (reason == FatalErrors.loginFailed) const SizedBox(height: 30.0), if (reason == FatalErrors.loginFailed) ActionButton(() { appState.startLogin(); }, locProvider.retry)
         ],
       ),
     );

@@ -31,5 +31,6 @@
     "dark": "Dark",
     "light": "Light",
     "retry": "Retry",
-    "loginFailed": "Authenticating with the server failed!"
+    "loginFailed": "Authenticating with the server failed!",
+    "unsupportedPlatform": "This platform is not supported at the moment. Stay tuned for updates!"
 }

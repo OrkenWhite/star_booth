@@ -1,19 +1,38 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:polling_booth/model/app_state.dart';
 import 'package:polling_booth/screens/home_screen.dart';
-import 'package:polling_booth/screens/login_failed_screen.dart';
+import 'package:polling_booth/screens/fatal_error_screen.dart';
 import 'package:polling_booth/screens/poll_code_screen.dart';
 import 'package:provider/provider.dart';
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  var fireBaseSupported = true;
+  try {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform
+    );
+  }
+  on UnsupportedError catch(_){
+    fireBaseSupported = false;
+    if (kDebugMode) {
+      print("Firebase isn't supported on this platform.");
+    }
+    else{
+      return;
+    }
+  }
+  runApp(MyApp(fireBaseSupported));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool fireBaseSupported;
+  const MyApp(this.fireBaseSupported,{super.key});
   static final _defaultLightColorScheme =
   ColorScheme.fromSwatch(primarySwatch: Colors.red);
 
@@ -46,7 +65,7 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: Builder(
-                builder: (context) => const LoginFailedScreen()
+                builder: (context) => fireBaseSupported ? const HomeScreen() : const FatalErrorScreen(FatalErrors.fireBaseUnsupported)
               )
             );
           }
