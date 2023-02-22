@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:polling_booth/model/app_state.dart';
 import 'package:polling_booth/screens/home_screen.dart';
 import 'package:polling_booth/screens/fatal_error_screen.dart';
-import 'package:polling_booth/screens/poll_code_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,25 +13,21 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   var fireBaseSupported = true;
   try {
+    WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform
     );
   }
   on UnsupportedError catch(_){
     fireBaseSupported = false;
-    if (kDebugMode) {
-      print("Firebase isn't supported on this platform.");
-    }
-    else{
-      return;
-    }
   }
   runApp(MyApp(fireBaseSupported));
 }
 
 class MyApp extends StatelessWidget {
   final bool fireBaseSupported;
-  const MyApp(this.fireBaseSupported,{super.key});
+  final appState = AppState();
+  MyApp(this.fireBaseSupported,{super.key});
   static final _defaultLightColorScheme =
   ColorScheme.fromSwatch(primarySwatch: Colors.red);
 
@@ -46,9 +41,10 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    appState.startLogin();
     return DynamicColorBuilder(builder:(lightScheme,darkScheme){
     return ChangeNotifierProvider<AppState>(
-      create: (context) => AppState(),
+      create: (context) => appState,
       child:
         Consumer<AppState>(
           builder: (context,appState,child) {
@@ -65,7 +61,17 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: Builder(
-                builder: (context) => fireBaseSupported ? const HomeScreen() : const FatalErrorScreen(FatalErrors.fireBaseUnsupported)
+                builder: (context) {
+                  if(!fireBaseSupported) return const FatalErrorScreen(FatalErrors.fireBaseUnsupported);
+                  switch(appState.appStates){
+                    case AppStates.loginFailed:
+                      return const FatalErrorScreen(FatalErrors.loginFailed);
+                    case AppStates.loggingIn:
+                      return const Center(child: CircularProgressIndicator());
+                    case AppStates.loggedIn:
+                      return const HomeScreen();
+                  }
+                }
               )
             );
           }

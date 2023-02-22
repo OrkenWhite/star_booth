@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 enum AppStates{
   loggingIn,
   loggedIn,
-  loginFailed
+  loginFailed,
 }
 
 class AppState extends ChangeNotifier {
@@ -17,7 +19,7 @@ class AppState extends ChangeNotifier {
     if(_appStateOverride != null) return _appStateOverride!;
     if(userCredential == null) {
       return AppStates.loggingIn;
-    } else if(userCredential?.credential == null) {
+    } else if(userCredential?.user == null) {
       return AppStates.loginFailed;
     } else {
       return AppStates.loggedIn;
@@ -25,6 +27,7 @@ class AppState extends ChangeNotifier {
   }
   void startLogin() async{
     try {
+      userCredential = null;
       userCredential = await FirebaseAuth.instance.signInAnonymously();
     } on FirebaseAuthException catch(e){
       _appStateOverride = AppStates.loginFailed;
