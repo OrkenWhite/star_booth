@@ -65,22 +65,25 @@ class VoteScreen extends StatelessWidget {
                                           width: MediaQuery.of(context).size.width / 3,
                                           child: Text(
                                               poll.options.keys.elementAt(i))),
-                                      Row(
-                                        children: [
-                                          Slider(
-                                              min: 0.0,
-                                              max: 5.0,
-                                              value: poll.options[poll
-                                                      .options.keys
-                                                      .elementAt(i)]!
-                                                  .toDouble(),
-                                              onChanged: (it) {
-                                                poll.setScore(i, it.toInt());
-                                              }),
-                                          Text(poll.options[poll.options.keys
-                                                  .elementAt(i)]!
-                                              .toString())
-                                        ],
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Slider(
+                                                min: 0.0,
+                                                max: 5.0,
+                                                value: poll.options[poll
+                                                        .options.keys
+                                                        .elementAt(i)]!
+                                                    .toDouble(),
+                                                onChanged: (it) {
+                                                  poll.setScore(i, it.toInt());
+                                                }),
+                                            Text(poll.options[poll.options.keys
+                                                    .elementAt(i)]!
+                                                .toString())
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),

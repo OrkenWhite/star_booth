@@ -27,6 +27,7 @@ class ScoreCard extends StatelessWidget{
               SizedBox(
                 width: MediaQuery.of(context).size.width / 3,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(score.toString(),style: (winner) ? winnerStyle : null),
                     Icon(winner ? Icons.check : Icons.star,color: (winner) ? theme.colorScheme.primary : null)
