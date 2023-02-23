@@ -16,10 +16,13 @@ class ActionButton extends StatelessWidget{
                 .colorScheme
                 .primary,
         minimumSize: const Size(70.0,50.0)),
-        child: Text(label,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0))
+        child: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(label,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0)),
+        )
     );
   }
 

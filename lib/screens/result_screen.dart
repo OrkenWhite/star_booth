@@ -42,7 +42,7 @@ class ResultScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(poll.title,style:theme.textTheme.titleLarge?.copyWith(color: theme.colorScheme.primary)),
+                  child: Text(poll.title,textAlign: TextAlign.center,style:theme.textTheme.titleLarge?.copyWith(color: theme.colorScheme.primary)),
                 ),
                 Expanded(
                   child: ListView.builder(

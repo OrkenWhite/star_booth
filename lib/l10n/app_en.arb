@@ -38,5 +38,6 @@
     "submitPollError": "An error occurred submitting the poll. Check the input fields!",
     "needMoreOptions": "Add more options!",
     "optionTooShort": "This option is too short!",
-    "needLaterDate": "Choose a later date!"
+    "needLaterDate": "Choose a later date!",
+    "copy": "Copy"
 }

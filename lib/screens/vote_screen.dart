@@ -37,6 +37,7 @@ class VoteScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 30.0),
                     child: Text(poll.title,
+                        textAlign: TextAlign.center,
                         style: theme.textTheme.headlineLarge
                             ?.copyWith(color: theme.colorScheme.primary)),
                   ),
@@ -61,7 +62,7 @@ class VoteScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(
-                                          width: 125,
+                                          width: MediaQuery.of(context).size.width / 3,
                                           child: Text(
                                               poll.options.keys.elementAt(i))),
                                       Row(

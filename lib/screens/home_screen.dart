@@ -75,11 +75,14 @@ class HomeScreen extends StatelessWidget {
                                   Row(children: [
                                     Icon(Icons.phone_android, color: iconColor),
                                     const SizedBox(width: 10),
-                                    Text(locProvider.useSystemTheme)
+                                    SizedBox(width: MediaQuery.of(context).size.width / 2.5,child: Text(locProvider.useSystemTheme))
                                   ]),
-                                  Text(appState.useSystemTheme
-                                      ? locProvider.on
-                                      : locProvider.off)
+                                  Expanded(
+                                    child: Text(appState.useSystemTheme
+                                        ? locProvider.on
+                                        : locProvider.off,
+                                    textAlign: TextAlign.end,),
+                                  )
                                 ])),
                         PopupMenuItem<BarMenuItem>(
                             value: BarMenuItem.toggleDarkMode,

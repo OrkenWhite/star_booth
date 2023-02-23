@@ -15,6 +15,7 @@ class StatusCard extends StatelessWidget{
           Center(
               child: Text(
                 text,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     color: foregroundColor ?? Theme.of(context).colorScheme.onPrimary,
                     fontSize: 18.0,

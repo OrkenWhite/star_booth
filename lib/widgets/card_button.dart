@@ -22,7 +22,7 @@ class CardButton extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon,size: 64.0),
-              Text(text,style:TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0))
+              Text(text,textAlign: TextAlign.center,style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0))
             ],
           ),
         )

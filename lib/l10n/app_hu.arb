@@ -38,5 +38,6 @@
     "submitPollError": "Hiba történt a beküldés közben. Ellenőrizd a beviteli mezőket!",
     "needMoreOptions": "Adj hozzá több lehetőséget!",
     "optionTooShort": "Ez a lehetőség túl rövid!",
-    "needLaterDate": "Válassz későbbi időpontot!"
+    "needLaterDate": "Válassz későbbi időpontot!",
+    "copy": "Másolás"
 }

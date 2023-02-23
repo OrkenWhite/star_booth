@@ -68,64 +68,66 @@ class VoteJoinState extends State<VoteJoinScreen> {
                   : Colors.white,
           title: Text(locProvider.enterCode),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (status != CodeValidationStatus.tooShort) Padding(
-                  padding: const EdgeInsets.only(bottom: 60),
-                  child: (status == CodeValidationStatus.invalid)
-                      ? StatusCard(theme.colorScheme.error,
-                          theme.colorScheme.onError, locProvider.codeInvalid)
-                      : status == CodeValidationStatus.valid
-                          ? StatusCard(null, null, locProvider.codeValid)
-                          : (status == CodeValidationStatus.validating)
-                              ? const Center(child: CircularProgressIndicator())
-                              : null),
-              Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 22),
-                        child: Text(locProvider.codeEntryHelp,style: theme.textTheme.titleMedium?.copyWith(fontSize: 20))),
-                    TextField(
-                      controller: codeInputController,
-                      onChanged: (it) {
-                        code = it;
-                        validateCode(appState);
-                      },
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30.0,
-                          color: theme.colorScheme.primary),
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          label: Text(locProvider.code)),
-                    ),
-                    if (status == CodeValidationStatus.valid)
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
-                              child: ActionButton(() {
-                                navigateWithVoteCode(appState, Navigator.of(context), code);
-                              }, locProvider.join),
-                            ),
-                          )
-                        ],
-                      )
-                  ],
-                ),
-              )),
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (status != CodeValidationStatus.tooShort) Padding(
+                    padding: const EdgeInsets.only(bottom: 60),
+                    child: (status == CodeValidationStatus.invalid)
+                        ? StatusCard(theme.colorScheme.error,
+                            theme.colorScheme.onError, locProvider.codeInvalid)
+                        : status == CodeValidationStatus.valid
+                            ? StatusCard(null, null, locProvider.codeValid)
+                            : (status == CodeValidationStatus.validating)
+                                ? const Center(child: CircularProgressIndicator())
+                                : null),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 22),
+                          child: Text(locProvider.codeEntryHelp,textAlign: TextAlign.center,style: theme.textTheme.titleMedium?.copyWith(fontSize: 20))),
+                      TextField(
+                        controller: codeInputController,
+                        onChanged: (it) {
+                          code = it.toUpperCase();
+                          validateCode(appState);
+                        },
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30.0,
+                            color: theme.colorScheme.primary),
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            label: Text(locProvider.code)),
+                      ),
+                      if (status == CodeValidationStatus.valid)
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20.0),
+                                child: ActionButton(() {
+                                  navigateWithVoteCode(appState, Navigator.of(context), code);
+                                }, locProvider.join),
+                              ),
+                            )
+                          ],
+                        )
+                    ],
+                  ),
+                )),
+              ],
+            ),
           ),
         ));
   }

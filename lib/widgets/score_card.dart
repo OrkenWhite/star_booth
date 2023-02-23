@@ -19,16 +19,19 @@ class ScoreCard extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: 200,
+                width: MediaQuery.of(context).size.width / 3,
                 child: Text(option,
                     style: (winner) ? winnerStyle : null
                 ),
               ),
-              Row(
-                children: [
-                  Text(score.toString(),style: (winner) ? winnerStyle : null),
-                  Icon(winner ? Icons.check : Icons.star,color: (winner) ? theme.colorScheme.primary : null)
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 3,
+                child: Row(
+                  children: [
+                    Text(score.toString(),style: (winner) ? winnerStyle : null),
+                    Icon(winner ? Icons.check : Icons.star,color: (winner) ? theme.colorScheme.primary : null)
+                  ],
+                ),
               )
             ]
         ),

@@ -3,7 +3,7 @@
    <application
         android:label="StarBooth"
         android:name="${applicationName}"
-        android:localeConfig="@xml/locales_config">
+        android:localeConfig="@xml/locales_config"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

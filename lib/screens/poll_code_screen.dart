@@ -5,6 +5,7 @@ import 'package:polling_booth/widgets/action_button.dart';
 import 'package:polling_booth/widgets/status_card.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/services.dart';
 
 import '../model/poll.dart';
 
@@ -55,12 +56,13 @@ class PollCodeScreen extends StatelessWidget {
                               style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 30.0),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 10.0) ,
+                              padding: const EdgeInsets.symmetric(vertical: 10.0) ,
                               child: Text(
                                   newPoll.code ?? "????",
                                   style: TextStyle(fontSize: 30.0,color: Theme.of(context).colorScheme.primary),
                               ),
-                            )
+                            ),
+                            ActionButton(() {Clipboard.setData(ClipboardData(text: newPoll.code)); }, locProvider.copy)
                           ],
                         ),
                       ),
