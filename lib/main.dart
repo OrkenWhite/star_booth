@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     if (fireBaseSupported) appState.startLogin();
+    appState.getPackageInfo();
     return DynamicColorBuilder(builder:(lightScheme,darkScheme){
     return ChangeNotifierProvider<AppState>(
       create: (context) => appState,

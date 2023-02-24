@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:polling_booth/model/new_poll_model.dart';
 import 'package:polling_booth/screens/about_star.dart';
 import 'package:polling_booth/screens/vote_join_screen.dart';
@@ -42,9 +43,9 @@ class HomeScreen extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
-                                  title: Text(locProvider.about),
+                                  title: Center(child: Text(locProvider.about)),
                                   content: Text(
-                                      "${locProvider.appName}\r\n${locProvider.copyright}"),
+                                      "${locProvider.appName} ${appState.packageInfo.version}\r\n${locProvider.copyright}",textAlign: TextAlign.center,),
                                   actions: <Widget>[
                                     TextButton(
                                         onPressed: () {

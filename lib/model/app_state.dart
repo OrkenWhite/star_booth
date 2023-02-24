@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:polling_booth/model/poll.dart';
 
 enum AppStates{
@@ -19,6 +20,7 @@ class AppState extends ChangeNotifier {
   UserCredential? userCredential;
   AppStates? _appStateOverride;
   Poll? currentPoll;
+  late PackageInfo packageInfo;
   AppStates get appStates {
     if(_appStateOverride != null) return _appStateOverride!;
     if(userCredential == null) {
@@ -50,5 +52,8 @@ class AppState extends ChangeNotifier {
     if (_themeMode == null) return;
     _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
+  }
+  void getPackageInfo() async{
+    packageInfo = await PackageInfo.fromPlatform();
   }
 }
