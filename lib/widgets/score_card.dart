@@ -4,7 +4,8 @@ class ScoreCard extends StatelessWidget{
   final String option;
   final int score;
   final bool winner;
-  const ScoreCard(this.option,this.score,this.winner,{super.key});
+  final bool percentage;
+  const ScoreCard(this.option,this.score,this.winner,this.percentage,{super.key});
   @override
   Widget build(BuildContext context){
     var theme = Theme.of(context);
@@ -29,8 +30,8 @@ class ScoreCard extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(score.toString(),style: (winner) ? winnerStyle : null),
-                    Icon(winner ? Icons.check : Icons.star,color: (winner) ? theme.colorScheme.primary : null)
+                    Text(percentage ?  "${score.toString()} %" : score.toString(),style: (winner) ? winnerStyle : null),
+                    Padding(padding:EdgeInsets.only(left: 2.0),child: Icon(winner ? Icons.check : percentage ? null : Icons.star,color: (winner) ? theme.colorScheme.primary : null))
                   ],
                 ),
               )

@@ -50,7 +50,8 @@ class ResultScreen extends StatelessWidget {
                       itemBuilder: (context,index) => ScoreCard(
                           poll.options[index],
                           poll.scores[index],
-                          poll.runoffIndexes.contains(index)
+                          poll.runoffIndexes.contains(index),
+                        false
                       )
                   ),
                 ),
@@ -63,8 +64,8 @@ class ResultScreen extends StatelessWidget {
                     itemCount: 2,
                     itemBuilder: (context,index) => ScoreCard(
                         poll.options[poll.runoffIndexes[index]],
-                        poll.runoffScores[index],
-                        (poll.runoffIndexes[index] == poll.winnerIndex))
+                        (poll.runoffScores[0] + poll.runoffScores[1]) > 0 ? ((poll.runoffScores[index] / (poll.runoffScores[0] + poll.runoffScores[1]))*100).round() : 0,
+                        (poll.runoffIndexes[index] == poll.winnerIndex),true)
                 )
                 ),
                 Text("${locProvider.winner}: ${poll.options[poll.winnerIndex]}",style: winnerStyle)
