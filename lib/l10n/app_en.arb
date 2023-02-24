@@ -7,7 +7,9 @@
     "about": "About",
     "copyright": "(C) 2023 Patrik Fábián",
     "ok": "OK",
-    "starDescription": "STAR (Score Then Automatic Runoff) voting is a voting method, which voters can give \"scores\" to each candidate.",
+    "starDescriptionLead": "STAR (Score Then Automatic Runoff) voting is a voting method, where voters give scores from 0 to 5 to each candidate.",
+    "voteCounting": "Vote counting",
+    "starDescriptionVoteCounting":  "The scores of each candidate are counted first. The two candidates earning the most points go to a runoff. Then the votes are counted again, but this time, the runoff candidates' scores are compared on each ballot and the one with more points gets that vote. The winner will be the candidate preferred by more votes to the other.",
     "title": "Question",
     "option": "Option",
     "deadline": "Vote ends",
@@ -39,5 +41,6 @@
     "needMoreOptions": "Add more options!",
     "optionTooShort": "This option is too short!",
     "needLaterDate": "Choose a later date!",
-    "copy": "Copy"
+    "copy": "Copy",
+    "aboutStarFurtherRead": "Learn more on starvoting.org"
 }

@@ -69,16 +69,20 @@ class VoteScreen extends StatelessWidget {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
-                                            Slider(
-                                                min: 0.0,
-                                                max: 5.0,
-                                                value: poll.options[poll
-                                                        .options.keys
-                                                        .elementAt(i)]!
-                                                    .toDouble(),
-                                                onChanged: (it) {
-                                                  poll.setScore(i, it.toInt());
-                                                }),
+                                            SizedBox(
+                                              width: MediaQuery.of(context).size.width / 2.5,
+                                              child: Slider(
+                                                  min: 0.0,
+                                                  max: 5.0,
+                                                  divisions: 5,
+                                                  value: poll.options[poll
+                                                          .options.keys
+                                                          .elementAt(i)]!
+                                                      .toDouble(),
+                                                  onChanged: (it) {
+                                                    poll.setScore(i, it.toInt());
+                                                  }),
+                                            ),
                                             Text(poll.options[poll.options.keys
                                                     .elementAt(i)]!
                                                 .toString())

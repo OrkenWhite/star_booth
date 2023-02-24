@@ -7,7 +7,9 @@
     "about": "Névjegy",
     "copyright": "(C) 2023 Fábián Patrik",
     "ok": "OK",
-    "starDescription": "STAR (Score Then Automatic Runoff) egy olyan szavazási módszer, ahol a szavazók \"pontszámot\" adnak a jelölteknek.",
+    "starDescriptionLead": "STAR (Score Then Automatic Runoff) egy olyan szavazási módszer, ahol a szavazók nullától ötig terjedő pontszámot adnak a jelölteknek.",
+    "voteCounting": "Szavazatszámlálás",
+    "starDescriptionVoteCounting":  "Először a jelöltek össz pontszáma kerül megszámlálásra. A két legtöbb pontot szerző jelölt jut a döntő fordulóba. A szavazatok újra megszámlálásra kerülnek, de ezúttal minden szavazólapon a két döntő fordulós jelölt pontszáma kerül összehasonlításra, a szavazatot a jobban támogatott jelölt szerzi meg. Az az opció lesz a győztes, amit több szavazó részesít előnyben a másik döntőshöz képest.",
     "title": "Kérdés",
     "option": "Válasz",
     "deadline": "Szavazás vége",
@@ -39,5 +41,6 @@
     "needMoreOptions": "Adj hozzá több lehetőséget!",
     "optionTooShort": "Ez a lehetőség túl rövid!",
     "needLaterDate": "Válassz későbbi időpontot!",
-    "copy": "Másolás"
+    "copy": "Másolás",
+    "aboutStarFurtherRead": "Bővebb információ a starvoting.org oldalon"
 }
