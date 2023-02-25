@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                             builder: (_) => AlertDialog(
                                   title: Center(child: Text(locProvider.about)),
                                   content: Text(
-                                      "${locProvider.appName} ${appState.packageInfo.version}\r\n${locProvider.copyright}",textAlign: TextAlign.center,),
+                                      "${locProvider.appName} ${appState.packageInfo!.version}\r\n${locProvider.copyright}",textAlign: TextAlign.center,),
                                   actions: <Widget>[
                                     TextButton(
                                         onPressed: () {
@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                     }
                   },
                   itemBuilder: (_) => <PopupMenuItem<BarMenuItem>>[
-                        PopupMenuItem<BarMenuItem>(
+                        if(appState.canSystemTheme!) PopupMenuItem<BarMenuItem>(
                             value: BarMenuItem.useSystemTheme,
                             onTap: () {},
                             child: Row(
@@ -109,11 +109,9 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         body: Padding(
-            padding: EdgeInsets.only(
-                left: 25.0,
-                right: 25.0,
-                top: orientation == Orientation.portrait ? 160.0 : 25.0,
-                bottom: orientation == Orientation.portrait ? 160.0 : 25.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: 25.0,
+                vertical: orientation == Orientation.portrait ? MediaQuery.of(context).size.height / 10: 25.0),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,

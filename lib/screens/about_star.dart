@@ -43,7 +43,7 @@ class AboutStarScreen extends StatelessWidget {
                             child: Image(image: const AssetImage("assets/star_infographic.jpg"),width: MediaQuery.of(context).size.width / 2),
                           ),
                           TextButton(onPressed:() async{
-                            if(await canLaunch("https://starvoting.org/star")){
+                            if(await canLaunchUrl(Uri.parse("https://starvoting.org/star"))){
                               launchUrl(Uri.parse("https://starvoting.org/star"));
                             }
                           }, child: Text(locProvider.aboutStarFurtherRead))

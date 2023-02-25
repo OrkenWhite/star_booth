@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_info/device_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
@@ -20,7 +21,9 @@ class AppState extends ChangeNotifier {
   UserCredential? userCredential;
   AppStates? _appStateOverride;
   Poll? currentPoll;
-  late PackageInfo packageInfo;
+  PackageInfo? packageInfo;
+  bool? material3Compatible;
+  bool? canSystemTheme;
   AppStates get appStates {
     if(_appStateOverride != null) return _appStateOverride!;
     if(userCredential == null) {
@@ -55,5 +58,20 @@ class AppState extends ChangeNotifier {
   }
   void getPackageInfo() async{
     packageInfo = await PackageInfo.fromPlatform();
+  }
+  void getCompatibilityMode() async{
+    if(Platform.isAndroid){
+      var androidInfo = await DeviceInfoPlugin().androidInfo;
+      material3Compatible = androidInfo.version.sdkInt < 28;
+      canSystemTheme = androidInfo.version.sdkInt  >= 29;
+      if(!canSystemTheme!) _themeMode = ThemeMode.light;
+    }
+    else{
+      material3Compatible = false;
+    }
+  }
+  void initEnvData() async{
+    getPackageInfo();
+    getCompatibilityMode();
   }
 }
