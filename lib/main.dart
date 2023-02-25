@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
   final appState = AppState();
   MyApp(this.fireBaseSupported,{super.key});
   static final _defaultLightColorScheme =
-  ColorScheme.fromSwatch(primarySwatch: Colors.purple);
+  ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey);
 
   static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: Colors.purple, brightness: Brightness.dark);
+      primarySwatch: Colors.blueGrey, brightness: Brightness.dark);
 
   // This widget is the root of your application.
   @override
@@ -51,21 +51,21 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               title: 'StarBooth',
               debugShowCheckedModeBanner: false,
-              theme: appState.material3Compatible != null ? ThemeData(
-                  useMaterial3: !appState.material3Compatible!,
-                  primaryColor: appState.material3Compatible! ? Colors.purple : null,
-                  colorScheme: lightScheme ?? _defaultLightColorScheme) : null,
+              theme: appState.notMaterial3Compatible != null ? ThemeData(
+                  useMaterial3: !appState.notMaterial3Compatible!,
+                  primaryColor: appState.notMaterial3Compatible! ? Colors.blueGrey : null,
+                  colorScheme: lightScheme ?? _defaultLightColorScheme) : ThemeData(primaryColor: Colors.blueGrey),
               themeMode: appState.themeMode ,
-              darkTheme:  appState.material3Compatible != null ? ThemeData(
-                  useMaterial3: !appState.material3Compatible!,
-                  primaryColor: appState.material3Compatible! ? Colors.purple : null,
-                  colorScheme: darkScheme ?? _defaultDarkColorScheme) : null,
+              darkTheme:  appState.notMaterial3Compatible != null ? ThemeData(
+                  useMaterial3: !appState.notMaterial3Compatible!,
+                  primaryColor: appState.notMaterial3Compatible! ? Colors.blueGrey : null,
+                  colorScheme: darkScheme ?? _defaultDarkColorScheme) : ThemeData(primaryColor: Colors.blueGrey),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: Builder(
                 builder: (context) {
                   if(!fireBaseSupported) return const FatalErrorScreen(FatalErrors.fireBaseUnsupported);
-                  if(appState.material3Compatible == null || appState.packageInfo == null)
+                  if(appState.notMaterial3Compatible == null || appState.packageInfo == null)
                     return Center(child:Text(AppLocalizations.of(context)!.appName,
                         style: const TextStyle(fontFamily: 'cursive', fontSize: 32.0)));
                   switch(appState.appStates){

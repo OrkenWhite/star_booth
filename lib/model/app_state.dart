@@ -22,7 +22,7 @@ class AppState extends ChangeNotifier {
   AppStates? _appStateOverride;
   Poll? currentPoll;
   PackageInfo? packageInfo;
-  bool? material3Compatible;
+  bool? notMaterial3Compatible;
   bool? canSystemTheme;
   AppStates get appStates {
     if(_appStateOverride != null) return _appStateOverride!;
@@ -36,6 +36,7 @@ class AppState extends ChangeNotifier {
   }
   void startLogin() async{
     try {
+      _appStateOverride = null;
       userCredential = null;
       await fireBaseMutex.acquire();
       userCredential = await FirebaseAuth.instance.signInAnonymously();
@@ -62,12 +63,12 @@ class AppState extends ChangeNotifier {
   void getCompatibilityMode() async{
     if(Platform.isAndroid){
       var androidInfo = await DeviceInfoPlugin().androidInfo;
-      material3Compatible = androidInfo.version.sdkInt < 28;
+      notMaterial3Compatible = androidInfo.version.sdkInt < 31;
       canSystemTheme = androidInfo.version.sdkInt  >= 29;
       if(!canSystemTheme!) _themeMode = ThemeMode.light;
     }
     else{
-      material3Compatible = false;
+      notMaterial3Compatible = false;
     }
   }
   void initEnvData() async{
